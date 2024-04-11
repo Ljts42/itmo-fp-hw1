@@ -6,7 +6,7 @@ module HW1.T1
   , nextDay
   ) where
 
-import Numeric.Natural (Natural)
+import           Numeric.Natural (Natural)
 
 data Day
   = Monday
@@ -19,13 +19,23 @@ data Day
   deriving Show
 
 nextDay :: Day -> Day
-nextDay = undefined
+nextDay Monday    = Tuesday
+nextDay Tuesday   = Wednesday
+nextDay Wednesday = Thursday
+nextDay Thursday  = Friday
+nextDay Friday    = Saturday
+nextDay Saturday  = Sunday
+nextDay Sunday    = Monday
 
 afterDays :: Natural -> Day -> Day
-afterDays = undefined
+afterDays 0 d = d
+afterDays n d = afterDays (n - 1) (nextDay d)
 
 isWeekend :: Day -> Bool
-isWeekend = undefined
+isWeekend Saturday = True
+isWeekend Sunday   = True
+isWeekend _        = False
 
 daysToParty :: Day -> Natural
-daysToParty = undefined
+daysToParty Friday = 0
+daysToParty d      = 1 + daysToParty (nextDay d)
